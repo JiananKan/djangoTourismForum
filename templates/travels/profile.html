@@ -1,0 +1,91 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+    <link href="/static/css/new/base.css" rel="stylesheet">
+    <link href="/static/css/new/plan.css" rel="stylesheet">
+    <link href="/static/css/new/umeditor.css" type="text/css" rel="stylesheet">
+
+    <!--- basic page needs
+   ================================================== -->
+    <meta charset="utf-8">
+
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+
+    <!-- script
+    ================================================== -->
+    <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/pace.min.js"></script>
+
+</head>
+
+<body>
+
+<header class="short-header">
+
+    <div class="gradient-block"></div>
+
+    <div class="row header-content">
+        <nav id="main-nav-wrap">
+            <ul class="main-navigation sf-menu">
+                <li class="current"><a href="{% url 'index' %}" title="">Home</a></li>
+                <li class="has-children"><a href="{% url 'add_article' %}" title="">New Post</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'my_article' %}" title="">My Posts</a></li>
+                <li><a href="{% url 'user_profile' %}" title="">My Profile</a></li>
+                <li><a href="{% url 'logout' %}" title="">Sign Out</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}" title="">Sign In</a></li>
+                <li><a href="{% url 'register' %}" title="">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav> <!-- end main-nav-wrap -->
+    </div>
+
+</header> <!-- end header -->
+
+<section id="bricks">
+
+    {% if userprofle and user %}
+    <table class="kv-table">
+        <tr>
+            <td class="kv-label" style="width:167px;">Profile Image</td>
+            <td class="kv-content hasEdit" style="width:auto;">
+                <img src="{{ userprofle.picture.url }}" height="200" width="200">
+            </td>
+        </tr>
+        <tr>
+            <td class="kv-label" style="width:167px;">Username</td>
+            <td class="kv-content hasEdit" style="width:auto">
+                {{ user }}
+            </td>
+        </tr>
+        <tr>
+            <td class="kv-label" style="width:167px;">Email Address</td>
+            <td class="kv-content hasEdit" style="width:auto;">
+                {{ user.email }}
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+    {% endif %}
+</section> <!-- end bricks -->
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register for Travels</title>
+    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<h1>Register for Travels</h1>
+
+{% if registered %}
+Rango says: <strong>thank you for registering!</strong>
+<a href="{% url 'index' %}">Return to the homepage.</a><br/>
+
+{% else %}
+
+
+ <div class="wrapper">
+    <form class="form-signin" id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+      <h2 class="form-signin-heading">Please Register</h2>
+        <input type="text" class="form-control" name="username" placeholder="username" required="" autofocus="" />
+        <input type="email" class="form-control" name="email" placeholder="email" required="" autofocus="" />
+        <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+         {{ profile_form.as_p }}
+        <a></a>
+        <br>
+      <button class="btn btn-lg btn-primary btn-block" value="Register" type="submit">Sign Up</button>
+    </form>
+  </div>
+{% endif %}
+
+</body>
+</html>

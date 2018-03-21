@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link href="/static/css/new/base.css" rel="stylesheet">
+    <link href="/static/css/new/plan.css" rel="stylesheet">
+    <link href="/static/css/new/umeditor.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/textArea.css" rel="stylesheet">
+</head>
+<body>
+{% if article %}
+<div>
+   <form id="article_form" method="post" action="{% url 'edit_article' article.id%}" enctype="multipart/form-data">
+        <table class="kv-table">
+            <tr>
+                <td class="kv-label" style="width:167px;">Title</td>
+                <td class="kv-content hasEdit" style="width:auto;">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {% endfor %}
+                    {{ form.title }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="kv-label" style="width:167px;">Tags</td>
+                <td class="kv-content hasEdit" style="width:auto;">
+                    {{ form.tags }}
+                </td>
+            </tr>
+             <tr>
+                <td class="kv-label" style="width:167px;">Content</td>
+                <td class="kv-content hasEdit" style="width:auto;">
+                    {{ form.content }}
+                </td>
+            </tr> <tr>
+                <td class="kv-label" style="width:167px;">Picture</td>
+                <td class="kv-content hasEdit" style="width:auto;">
+                    {{ form.picture }}
+                </td>
+            </tr>
+            <tr>
+                <td class="kv-content" style="width:auto;">
+
+                    {{ required }}
+                </td>
+                <td class="kv-content" style="width:auto;">
+                    <div>
+                        <input class="button-label button " type="submit" name="submit" value="Post"/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endif %}
+
+</body>
+</html>

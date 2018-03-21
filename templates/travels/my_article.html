@@ -1,0 +1,48 @@
+{% extends 'travels/base.html' %}
+
+{% block articles %}
+<div class="row masonry">
+    <!-- brick-wrapper -->
+    <div class="bricks-wrapper">
+        <div class="grid-sizer"></div>
+
+        {% if articles %}
+        {% for article in articles %}
+        <article class="brick entry format-standard animate-this">
+            <div class="entry-thumb">
+                <a href="{% url 'show_article' article.id %}" class="thumb-link">
+                    {% if article.picture %}
+                    <img src="{{ article.picture.url }}" alt="building">
+                    {% endif %}
+                </a>
+            </div>
+            <div class="entry-text">
+                <div class="entry-header">
+                    <div class="entry-meta">
+                            <span class="cat-links">
+                               <a>{{ article.tags }}</a>
+                            </span>
+                    </div>
+                    <h1 class="entry-title"><a href="{% url 'show_article' article.id %}">{{ article.title }}</a></h1>
+                </div>
+                <div class="entry-excerpt">
+                    {{ article.content|slice:":200" }}
+                </div>
+
+                <div class="caption">
+                    <!-- Delete Album -->
+
+                    <a href="{% url 'delete_article' article.id %}">Delete</a>
+                    <a href="{% url 'edit_article' article.id %}"><i class="icon-trash"></i>Edit</a>
+
+                </div>
+            </div>
+
+        </article> <!-- end article -->
+        {% endfor %}
+        {% else %}
+        <h2>No articles are posted!</h2>
+        {% endif %}
+    </div> <!-- end brick-wrapper -->
+</div> <!-- end row -->
+{% endblock %}
